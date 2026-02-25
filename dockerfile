@@ -1,2 +1,9 @@
-FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM php:7.4-apache
+
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
+COPY . /var/www/html/
+
+RUN chown -R www-data:www-data /var/www/html/
+
+EXPOSE 80
